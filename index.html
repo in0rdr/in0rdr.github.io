@@ -7,20 +7,74 @@ title: Home
 
 <section class="post-list">
   <div class="container">
+    <h2>Education</h2>
     {% for post in site.posts %}
-      {% unless post.next %}
-        <h2 class="category-title">{{ post.date | date: '%Y' }}</h2>
-      {% else %}
-        {% capture year %}{{ post.date | date: '%Y' }}{% endcapture %}
-        {% capture nyear %}{{ post.next.date | date: '%Y' }}{% endcapture %}
-        {% if year != nyear %}
-          <h2 class="category-title">{{ post.date | date: '%Y' }}</h2>
-        {% endif %}
-      {% endunless %}
+      {% if post.categories contains "education" %}
       <article class="post-item">
-        <span class="post-meta date-label">{{ post.date | date: "%b %d" }}</span>
+        <span class="post-meta date-label">{{ post.nicedate }}</span>
         <div class="article-title"><a class="post-link" href="{{ post.url | prepend: site.baseurl | prepend: site.url }}">{{ post.title }}</a></div>
       </article>
+      {% endif %}
+    {% endfor %}
+  </div>
+  <div class="container">
+    <h2>Research Experience</h2>
+    {% for post in site.posts %}
+      {% if post.categories contains "research" %}
+      <article class="post-item">
+        <span class="post-meta date-label">{{ post.nicedate }}</span>
+        <div class="article-title"><a class="post-link" href="{{ post.url | prepend: site.baseurl | prepend: site.url }}">{{ post.title }}</a></div>
+      </article>
+      {% endif %}
+    {% endfor %}
+  </div>
+  <div class="container">
+    <h2>Teaching Experience</h2>
+    {% for post in site.posts %}
+      {% if post.categories contains "teaching" %}
+      <article class="post-item">
+        <span class="post-meta date-label">{{ post.nicedate }}</span>
+        <div class="article-title"><a class="post-link" href="{{ post.url | prepend: site.baseurl | prepend: site.url }}">{{ post.title }}</a></div>
+      </article>
+      {% endif %}
+    {% endfor %}
+  </div>
+  <div class="container">
+    <h2>Publications</h2>
+    {% for post in site.posts %}
+      {% if post.categories contains "publication" %}
+      <article class="post-item">
+        <p class="post-meta date-label">
+          {{ post.nicedate }}
+        </p>
+        <div class="article-title">
+          <a class="post-link" href="{{ post.url | prepend: site.baseurl | prepend: site.url }}">
+            {{ post.citation }}
+          </a>
+          {% if post.bibtexturl %}
+            <a href="{{ post.bibtexturl }}">{% octicon gist %}</a>
+          {% endif %}
+          {% if post.pdfurl %}
+            <a href="{{ post.pdfurl }}">{% octicon file-pdf %}</a>
+          {% endif %}
+        </div>
+      </article>
+      {% endif %}
+    {% endfor %}
+    <br>
+    <a href="http://www.merlin.uzh.ch/search/quickContributionSearch?keywords=Andreas+Gruhler">
+     {% octicon link-external %} List of contributions (UZH)
+    </a>
+  </div>
+  <div class="container">
+    <h2>Professional Experience</h2>
+    {% for post in site.posts %}
+      {% if post.categories contains "professional" %}
+      <article class="post-item">
+        <span class="post-meta date-label">{{ post.nicedate }}</span>
+        <div class="article-title"><a class="post-link" href="{{ post.url | prepend: site.baseurl | prepend: site.url }}">{{ post.title }}</a></div>
+      </article>
+      {% endif %}
     {% endfor %}
   </div>
 
